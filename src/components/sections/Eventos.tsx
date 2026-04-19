@@ -7,49 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-
-const eventos = [
-  {
-    id: 1,
-    titulo: "VII Semana de Enfermagem",
-    subtitulo: "Ética, Técnica, Inovação e Política na Enfermagem",
-    data: "Em breve",
-    mes: "2026",
-    categoria: "Saúde",
-    cor: "#10B981",
-    imagem: "/images/eventos/semana-enfermagem.jpg",
-  },
-  {
-    id: 2,
-    titulo: "III SEPRIS",
-    subtitulo: "Seminário de Propriedade Intelectual e Inovação de Sobral",
-    data: "24",
-    mes: "Abril",
-    categoria: "Inovação",
-    cor: "#0052FF",
-    imagem: "/images/eventos/sepris.jpg",
-  },
-  {
-    id: 3,
-    titulo: "XII SEMIC",
-    subtitulo: "O Futuro do Trabalho na Sociedade Algorítmica",
-    data: "26–27",
-    mes: "Maio",
-    categoria: "Científico",
-    cor: "#F97316",
-    imagem: "/images/eventos/semic.png",
-  },
-  {
-    id: 4,
-    titulo: "Aula Magna",
-    subtitulo: "Mediação e as Novas Competências Jurídicas",
-    data: "11",
-    mes: "Março",
-    categoria: "Direito",
-    cor: "#8B5CF6",
-    imagem: "/images/eventos/aula-magna.jpg",
-  },
-];
+import { eventos } from "@/data/flf";
 
 export default function Eventos() {
   const ref = useRef(null);

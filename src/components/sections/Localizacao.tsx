@@ -3,7 +3,7 @@ import { MapPin, Phone, Clock, Navigation } from "lucide-react";
 
 export default function Localizacao() {
   return (
-    <section className="bg-gradient-to-b from-white to-white">
+    <section id="localizacao" className="bg-gradient-to-b from-white to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 

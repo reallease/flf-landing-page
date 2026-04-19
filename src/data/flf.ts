@@ -42,35 +42,46 @@ export interface Evento {
   categoria: string;
 }
 
-
-// eventos de exemplo
-export const eventos: Evento[] = [
+export const eventos = [
   {
     id: 1,
-    titulo: "Semana Acadêmica de Medicina",
-    data: "15 Ago 2026",
-    local: "Auditório Principal — FLF",
-    descricao: "Palestras, workshops e cases clínicos com especialistas da área médica.",
-    imagem: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80",
-    categoria: "Acadêmico",
+    titulo: "VII Semana de Enfermagem",
+    subtitulo: "Ética, Técnica, Inovação e Política na Enfermagem",
+    data: "Em breve",
+    mes: "2026",
+    categoria: "Saúde",
+    cor: "#10B981",
+    imagem: "/images/eventos/semana-enfermagem.jpg",
   },
   {
     id: 2,
-    titulo: "Feira de Carreiras 2026",
-    data: "22 Ago 2026",
-    local: "Campus FLF — Sobral",
-    descricao: "Conecte-se com mais de 50 empresas parceiras e garanta seu estágio ou emprego.",
-    imagem: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-    categoria: "Carreira",
+    titulo: "III SEPRIS",
+    subtitulo: "Seminário de Propriedade Intelectual e Inovação de Sobral",
+    data: "24",
+    mes: "Abril",
+    categoria: "Inovação",
+    cor: "#0052FF",
+    imagem: "/images/eventos/sepris.jpg",
   },
   {
     id: 3,
-    titulo: "Congresso de Direito Digital",
-    data: "05 Set 2026",
-    local: "Auditório A — FLF",
-    descricao: "Debates sobre LGPD, crimes cibernéticos e o futuro do direito na era digital.",
-    imagem: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
-    categoria: "Congresso",
+    titulo: "XII SEMIC",
+    subtitulo: "O Futuro do Trabalho na Sociedade Algorítmica",
+    data: "26–27",
+    mes: "Maio",
+    categoria: "Científico",
+    cor: "#F97316",
+    imagem: "/images/eventos/semic.png",
+  },
+  {
+    id: 4,
+    titulo: "Aula Magna",
+    subtitulo: "Mediação e as Novas Competências Jurídicas",
+    data: "11",
+    mes: "Março",
+    categoria: "Direito",
+    cor: "#8B5CF6",
+    imagem: "/images/eventos/aula-magna.jpg",
   },
 ];
 
