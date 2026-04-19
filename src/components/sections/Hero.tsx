@@ -31,12 +31,12 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=85"
-          alt="Campus UniVista"
+          alt="Campus"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0052FF]/95 via-[#0041CC]/90 to-[#001A66]/95" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0052FF]/95 via-[#0041CC]/90 to-[#001A66]/90" />
       </div>
 
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -74,7 +74,7 @@ export default function Hero() {
             className="text-white leading-[1.05] mb-6"
             style={{
               fontFamily: "Syne, sans-serif",
-              fontWeight: 800,
+              fontWeight: 700,
               fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
             }}
           >
