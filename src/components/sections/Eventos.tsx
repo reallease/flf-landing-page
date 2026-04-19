@@ -1,112 +1,223 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import { eventos } from "@/data/flf";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 
-const categoriaCor: Record<string, string> = {
-  Acadêmico: "bg-blue-100 text-blue-700",
-  Carreira: "bg-emerald-100 text-emerald-700",
-  Congresso: "bg-purple-100 text-purple-700",
-};
+const eventos = [
+  {
+    id: 1,
+    titulo: "VII Semana de Enfermagem",
+    subtitulo: "Ética, Técnica, Inovação e Política na Enfermagem",
+    data: "Em breve",
+    mes: "2026",
+    categoria: "Saúde",
+    cor: "#10B981",
+    imagem: "/images/eventos/semana-enfermagem.jpg",
+  },
+  {
+    id: 2,
+    titulo: "III SEPRIS",
+    subtitulo: "Seminário de Propriedade Intelectual e Inovação de Sobral",
+    data: "24",
+    mes: "Abril",
+    categoria: "Inovação",
+    cor: "#0052FF",
+    imagem: "/images/eventos/sepris.jpg",
+  },
+  {
+    id: 3,
+    titulo: "XII SEMIC",
+    subtitulo: "O Futuro do Trabalho na Sociedade Algorítmica",
+    data: "26–27",
+    mes: "Maio",
+    categoria: "Científico",
+    cor: "#F97316",
+    imagem: "/images/eventos/semic.png",
+  },
+  {
+    id: 4,
+    titulo: "Aula Magna",
+    subtitulo: "Mediação e as Novas Competências Jurídicas",
+    data: "11",
+    mes: "Março",
+    categoria: "Direito",
+    cor: "#8B5CF6",
+    imagem: "/images/eventos/aula-magna.jpg",
+  },
+];
 
 export default function Eventos() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", dragFree: false },
+    [Autoplay({ delay: 4000, stopOnInteraction: true })]
+  );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", () => setScrollSnaps(emblaApi.scrollSnapList()));
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi]);
+
   return (
-    <section id="eventos" className="py-24 lg:py-32 bg-[#0A0A1A]" ref={ref}>
+    <section id="eventos" className="py-24 lg:py-32 bg-white overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-6"
         >
           <div>
-            <span className="inline-block text-[#4D8DFF] text-sm font-semibold tracking-widest uppercase mb-4">
-              Agenda FLF
+            <span className="inline-block text-[#0052FF] text-xs font-bold tracking-widest uppercase mb-3">
+              Agenda FLF · 2026
             </span>
             <h2
-              className="text-white leading-tight"
+              className="text-[#0A0A1A] leading-tight"
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: 800,
                 fontSize: "clamp(2rem, 4vw, 3rem)",
               }}
             >
-              Próximos
+              Eventos que marcam
               <br />
-              <span className="text-[#4D8DFF]">Eventos</span>
+              <span className="text-[#0052FF]">sua trajetória</span>
             </h2>
           </div>
-          <p className="text-gray-500 text-base max-w-xs">
-            Palestras, congressos e feiras que vão turbinar seu currículo.
-          </p>
+
+          {/* Arrows */}
+          <div className="flex gap-3 self-start sm:self-auto">
+            <button
+              onClick={scrollPrev}
+              aria-label="Anterior"
+              className="w-12 h-12 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-400 hover:border-[#0052FF] hover:text-[#0052FF] transition-all duration-200"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <button
+              onClick={scrollNext}
+              aria-label="Próximo"
+              className="w-12 h-12 rounded-full bg-[#0052FF] flex items-center justify-center text-white hover:bg-[#003BCC] hover:scale-105 transition-all duration-200"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          {eventos.map((evento, i) => (
-            <motion.div
-              key={evento.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-[#0052FF]/40 transition-all duration-300"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={evento.imagem}
-                  alt={evento.titulo}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A1A] via-[#0A0A1A]/40 to-transparent" />
+        {/* Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="overflow-hidden -mx-4 px-4"
+          ref={emblaRef}
+        >
+          <div className="flex gap-5">
+            {eventos.map((evento, i) => (
+              <div
+                key={evento.id}
+                className="flex-none w-[82vw] sm:w-[52%] lg:w-[36%] group"
+              >
+                {/* Image block */}
+                <div className="relative rounded-2xl overflow-hidden mb-4" style={{ aspectRatio: "16/10" }}>
+                  <Image
+                    src={evento.imagem}
+                    alt={evento.titulo}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 82vw, (max-width: 1024px) 52vw, 36vw"
+                  />
 
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${categoriaCor[evento.categoria]}`}>
-                    {evento.categoria}
-                  </span>
+                  {/* Subtle bottom gradient for legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+                  {/* Date badge — top right */}
+                  <div className="absolute top-3 right-3 bg-white rounded-xl px-3.5 py-2 text-center shadow-md min-w-[52px]">
+                    <p
+                      className="text-[#0A0A1A] font-black leading-none"
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: "clamp(1rem, 2vw, 1.25rem)",
+                      }}
+                    >
+                      {evento.data}
+                    </p>
+                    <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wide mt-0.5">
+                      {evento.mes}
+                    </p>
+                  </div>
+
+                  {/* Category — bottom left */}
+                  <div className="absolute bottom-3 left-3">
+                    <span
+                      className="px-3 py-1 rounded-full text-white text-xs font-bold shadow-sm"
+                      style={{ backgroundColor: evento.cor }}
+                    >
+                      {evento.categoria}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-6 bg-[#111827]">
+                {/* Text */}
                 <h3
-                  className="text-white font-bold text-lg mb-3 leading-tight"
+                  className="text-[#0A0A1A] font-bold text-lg leading-snug mb-1 group-hover:text-[#0052FF] transition-colors duration-200"
                   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                 >
                   {evento.titulo}
                 </h3>
-
-                <div className="flex flex-col gap-2 mb-4">
-                  <div className="flex items-center gap-2 text-gray-400 text-sm">
-                    <Calendar size={13} className="text-[#4D8DFF] flex-none" />
-                    {evento.data}
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-400 text-sm">
-                    <MapPin size={13} className="text-[#4D8DFF] flex-none" />
-                    {evento.local}
-                  </div>
-                </div>
-
-                <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                  {evento.descricao}
+                <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                  {evento.subtitulo}
                 </p>
-
-                <a
-                  href="#contato"
-                  className="inline-flex items-center gap-1.5 text-[#4D8DFF] text-sm font-bold hover:gap-3 transition-all duration-200"
-                >
-                  Quero participar
-                  <ArrowRight size={14} />
-                </a>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom — dots + link */}
+        <div className="flex items-center justify-between mt-10">
+          <div className="flex gap-2 items-center">
+            {scrollSnaps.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                aria-label={`Evento ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === selectedIndex
+                    ? "w-7 h-2.5 bg-[#0052FF]"
+                    : "w-2.5 h-2.5 bg-gray-200 hover:bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+
+          <a
+            href="#contato"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0052FF] hover:gap-3 transition-all duration-200"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
+            Quero participar
+            <ArrowRight size={14} />
+          </a>
         </div>
       </div>
     </section>
