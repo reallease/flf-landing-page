@@ -38,17 +38,18 @@ src/
 ├── components/
 │   ├── layout/
 │   │   ├── Navbar.tsx       # Navbar fixa com scroll effect
-│   │   └── Footer.tsx       # Footer completo com redes sociais
+│   │   └── Footer.tsx       # Footer completo com redes sociais e algumas informações
 │   └── sections/
 │       ├── CursosEAD.tsx            # Roteia e mostra todos os cursos EAD pegando de data/flf.ts
-│       ├── CursosEAD.tsx            # Roteia e mostra todos os cursos Prenciais pegando de data/flf.ts
+│       ├── CursosPrenciais.tsx            # Roteia e mostra todos os cursos Prenciais pegando de data/flf.ts
 │       ├── Diferenciais.tsx         # Página para mostrar qualidades e informações sobre a FLF
 │       ├── Eventos.tsx              # Roteia e mostra todos os eventos pegando de data/flf.ts
-│       └── FormularioInscricao.tsx  # Formulário React Hook Form + Zod
+│       ├── FIES.tsx                 # Seção somente para o FIES, com perguntas e respostas do instagram
+│       └── FormularioInscricao.tsx  # Formulário com React Hook Form + Zod para inscrição dos cursos
 │       ├── Hero.tsx                 # Parte principal onde fica uma imagem de fundo e algumas informações
+│       ├── Localizacao.tsx          # Seção onde tem informações sobre a localização e uma ação para o Google Maps
 ├── data/
-│   ├── cursos.ts            # cursos flf
-│   └── conteudo.ts          # galeria, diferenciais
+│   └── flf.ts               # Gerencia imagens, textos e cursos
 └── lib/
     ├── utils.ts             # cn() helper
     └── validations.ts       # Schema Zod do formulário
