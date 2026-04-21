@@ -11,6 +11,7 @@ const links = [
   { href: "#cursos-presenciais", label: "Presencial" },
   { href: "#cursos-ead", label: "EAD" },
   { href: "#fies", label: "FIES" },
+  { label: "Vídeos", href: "#videos" },
   { href: "#eventos", label: "Eventos" },
   { href: "#localizacao", label: "Localização" },
   { href: "#contato", label: "Contato" },

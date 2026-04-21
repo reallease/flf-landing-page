@@ -6,6 +6,7 @@ const links = [
   { label: "Cursos Presenciais", href: "#cursos-presenciais" },
   { label: "Cursos EAD", href: "#cursos-ead" },
   { label: "FIES", href: "#fies" },
+  { label: "Vídeos", href: "#videos" },
   { label: "Eventos", href: "#eventos" },
   { label: "Localização", href: "#localizacao" },
   { label: "Contato", href: "#contato" },
@@ -22,7 +23,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="bg-white rounded-2xl px-5 py-4 inline-block mb-6 shadow-lg">
               <Image
-                src="/images/logo-flf.png"
+                src="/images/logo-colorida.png"
                 alt="Faculdade Luciano Feijão"
                 width={160}
                 height={48}

@@ -8,6 +8,7 @@ import FIES from "@/components/sections/FIES";
 import Eventos from "@/components/sections/Eventos";
 import FormularioInscricao from "@/components/sections/FormularioInscricao";
 import Localizacao from "@/components/sections/Localizacao";
+import Videos from "@/components/sections/Videos";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <CursosPresenciais />
       <CursosEAD />
       <FIES />
+      <Videos />
       <Eventos />
       <FormularioInscricao />
       <Localizacao />
